@@ -19,7 +19,7 @@ $app->setName('RedSlim');
 session_cache_limiter(false);
 session_start();
 
-// For encrypted cookie session 
+// For encrypted cookie session
 /*
 $app->add(new \Slim\Middleware\SessionCookie(array(
             'expires' => '20 minutes',
@@ -56,7 +56,7 @@ foreach(glob(ROOT . '/app/controllers/*.php') as $router) {
 | Configure Twig
 |--------------------------------------------------------------------------
 |
-| The application uses Twig as its template engine. This script configures 
+| The application uses Twig as its template engine. This script configures
 | the template paths and adds some extensions.
 |
 */
@@ -83,11 +83,11 @@ $view->parserExtensions = array(
 |
 */
 class R extends RedBean_Facade {
-    
+
     static function loadConfig($config) {
-        
-        $conn = $config['connections'][$config['default']];       
-        
+
+        $conn = $config['connections'][$config['default']];
+
         switch($conn['driver']) {
             case 'mysql':
                 self::setup ($conn['driver'] . ':host=' . $conn['host'] . '; dbname=' . $conn['database'], $conn['username'], $conn['password']);
@@ -97,7 +97,7 @@ class R extends RedBean_Facade {
                 break;
         }
     }
-    
+
 }
 
 R::loadConfig(require_once ROOT . '/app/config/database.php');
@@ -105,9 +105,9 @@ R::loadConfig(require_once ROOT . '/app/config/database.php');
 // Disable fluid mode in production environment
 $app->configureMode(SLIM_MODE_PRO, function () use ($app) {
     // note, transactions will be auto-committed in fluid mode
-    R::freeze(true);  
+    R::freeze(true);
 });
-      
+
 
 /*
 |--------------------------------------------------------------------------
